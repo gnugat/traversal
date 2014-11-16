@@ -43,7 +43,7 @@ class Traversal
             $current = &$current[$key];
         }
 
-        $current = call_user_func_array($f, array_merge([$current], $args));
+        $current = call_user_func_array($f, array_merge(array($current), $args));
 
         return $array;
     }

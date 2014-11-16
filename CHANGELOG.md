@@ -2,5 +2,6 @@
 
 ## 1.0.0
 
-* replaced functions by object
+* used PHP 5.3 array syntax
+* encapsulated get-in functions in Traversal service
 * fixed igorw/get-in issue #13

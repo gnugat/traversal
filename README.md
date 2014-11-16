@@ -24,6 +24,7 @@ $baz = $traversal->getIn($data, ['foo', 'bar', 'baz']);
 > a functional one: you can inject it in your services as a dependency and mock
 > it easily.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/31a73802-2b87-4d65-9ae1-52edaac9f2a6/mini.png)](https://insight.sensiolabs.com/projects/31a73802-2b87-4d65-9ae1-52edaac9f2a6)
 [![Travis CI](https://travis-ci.org/gnugat/traversal.png)](https://travis-ci.org/gnugat/traversal)
 
 ## Installation
