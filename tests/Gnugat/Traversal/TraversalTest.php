@@ -1,16 +1,26 @@
 <?php
 
-namespace igorw;
+namespace tests\Gnugat\Traversal;
 
-class GetInTest extends \PHPUnit_Framework_TestCase
+use Gnugat\Traversal\Traversal;
+use PHPUnit_Framework_TestCase;
+
+class TraversalTest extends PHPUnit_Framework_TestCase
 {
-    /** @dataProvider provideGetIn */
-    function testGetIn($expected, $array, $keys, $default = null)
+    private $traversal;
+
+    protected function setUp()
     {
-        $this->assertSame($expected, get_in($array, $keys, $default));
+        $this->traversal = new Traversal();
     }
 
-    function provideGetIn()
+    /** @dataProvider provideGetIn */
+    public function testGetIn($expected, $array, $keys, $default = null)
+    {
+        $this->assertSame($expected, $this->traversal->getIn($array, $keys, $default));
+    }
+
+    public function provideGetIn()
     {
         $single = ['key' => 'value'];
         $nested = ['foo' => ['bar' => ['baz' => 'value']]];
@@ -32,12 +42,15 @@ class GetInTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @dataProvider provideUpdateIn */
-    function testUpdateIn($expected, $array, $keys, $fn, array $args = [])
+    public function testUpdateIn($expected, $array, $keys, $fn, array $args = [])
     {
-        $this->assertSame($expected, call_user_func_array('igorw\update_in', array_merge([$array, $keys, $fn], $args)));
+        $this->assertSame($expected, call_user_func_array(
+            array($this->traversal, 'updateIn'),
+            array_merge([$array, $keys, $fn], $args)
+        ));
     }
 
-    function provideUpdateIn()
+    public function provideUpdateIn()
     {
         $nested = ['foo' => ['bar' => ['baz' => 40]]];
         $single = ['key' => 'value'];
@@ -58,12 +71,15 @@ class GetInTest extends \PHPUnit_Framework_TestCase
      * @dataProvider provideInvalidUpdateIn
      * @expectedException InvalidArgumentException
      */
-    function testInvalidUpdateIn($expected, $array, $keys, $fn, array $args = [])
+    public function testInvalidUpdateIn($expected, $array, $keys, $fn, array $args = [])
     {
-        $this->assertSame($expected, call_user_func_array('igorw\update_in', array_merge([$array, $keys, $fn], $args)));
+        $this->assertSame($expected, call_user_func_array(
+            array($this->traversal, 'updateIn'),
+            array_merge([$array, $keys, $fn], $args)
+        ));
     }
 
-    function provideInvalidUpdateIn()
+    public function provideInvalidUpdateIn()
     {
         $nested = ['foo' => ['bar' => ['baz' => 40]]];
 
@@ -77,12 +93,12 @@ class GetInTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @dataProvider provideAssocIn */
-    function testAssocIn($expected, $array, $keys, $value)
+    public function testAssocIn($expected, $array, $keys, $value)
     {
-        $this->assertSame($expected, assoc_in($array, $keys, $value));
+        $this->assertSame($expected, $this->traversal->assocIn($array, $keys, $value));
     }
 
-    function provideAssocIn()
+    public function provideAssocIn()
     {
         $nested = ['foo' => ['bar' => ['baz' => 'value']]];
         $single = ['key' => 'value'];

@@ -1,12 +1,6 @@
-### 1.0.2 (2014-09-03)
+# CHANGELOG
 
-  * Allow `assoc_in` to override non-array values (@marcioAlmada)
+## 1.0.0
 
-### 1.0.1 (2014-07-06)
-
-  * Support for null values
-  * Micro-optimization (@AnhNhan)
-
-### 1.0.0 (2014-01-08)
-
-  * Initial release
+* replaced functions by object
+* fixed igorw/get-in issue #13

@@ -1,8 +1,6 @@
-# get-in
+# Traversal
 
-[![Build Status](https://travis-ci.org/igorw/get-in.png)](https://travis-ci.org/igorw/get-in)
-
-Functions for for hash map (assoc array) traversal.
+A service for hash map (assoc array) traversal.
 
 When dealing with nested associative structures, traversing them can become
 quite a pain. Mostly because of the amount of `isset` checking that is
@@ -15,23 +13,38 @@ something like this:
 $baz = (isset($data['foo']['bar']['baz'])) ? $data['foo']['bar']['baz'] : null;
 ```
 
-Enough already! `get-in` provides a better way:
+Enough already! `Traversal` provides a better way:
 
 ```php
-$baz = igorw\get_in($data, ['foo', 'bar', 'baz']);
+$baz = $traversal->getIn($data, ['foo', 'bar', 'baz']);
 ```
+
+> **Note**: `Traversal` is a fork of [Igor](https://igor.io/)'s [get-in](https://github.com/igorw/get-in).
+> It provides support for PHP 5.3 and uses an Object Oriented approach instead of
+> a functional one: you can inject it in your services as a dependency and mock
+> it easily.
+
+[![Travis CI](https://travis-ci.org/gnugat/traversal.png)](https://travis-ci.org/gnugat/traversal)
 
 ## Installation
 
-Through [composer](http://getcomposer.org):
+Use [Composer](http://getcomposer.org/) to install Traversal in your projects:
 
-```bash
-$ composer require igorw/get-in:~1.0
-```
+    composer require gnugat/traversal:~1.0
 
 ## Usage
 
-### get_in
+Instanciating `Traversal` is very easy:
+
+```php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+$traversal = new Traversal();
+```
+
+### Get in
 
 Retrieve value from a nested structure using a list of keys:
 
@@ -42,7 +55,7 @@ $users = [
     ['name' => 'Acme Inc'],
 ];
 
-$name = igorw\get_in($users, [1, 'name']);
+$name = $traversal->getIn($users, [1, 'name']);
 //= 'Jane Doe'
 ```
 
@@ -51,7 +64,7 @@ Non existent keys return null:
 ```php
 $data = ['foo' => 'bar'];
 
-$baz = igorw\get_in($data, ['baz']);
+$baz = $traversal->getIn($data, ['baz']);
 //= null
 ```
 You can provide a default value that will be used instead of null:
@@ -59,10 +72,10 @@ You can provide a default value that will be used instead of null:
 ```php
 $data = ['foo' => 'bar'];
 
-$baz = igorw\get_in($data, ['baz'], 'qux');
+$baz = $traversal->getIn($data, ['baz'], 'qux');
 //= 'qux'
 ```
-### update_in
+### Update in
 
 Apply a function to the value at a particular location in a nested structure:
 
@@ -72,7 +85,7 @@ $inc = function ($x) {
     return $x + 1;
 };
 
-$new = igorw\update_in($data, ['foo', 'answer'], $inc);
+$new = $traversal->updateIn($data, ['foo', 'answer'], $inc);
 //= ['foo' => ['answer' => 43]]
 ```
 
@@ -84,18 +97,18 @@ $concat = function (/* $args... */) {
     return implode('', func_get_args());
 };
 
-$new = igorw\update_in($data, ['foo'], $concat, ' is the ', 'best');
+$new = $traversal->updateIn($data, ['foo'], $concat, ' is the ', 'best');
 //= ['foo' => 'bar is the best']
 ```
 
-### assoc_in
+### Assoc in
 
 Set a value at a particular location:
 
 ```php
 $data = ['foo' => 'bar'];
 
-$new = igorw\assoc_in($data, ['foo'], 'baz');
+$new = $traversal->assocIn($data, ['foo'], 'baz');
 //= ['foo' => 'baz']
 ```
 
@@ -104,7 +117,7 @@ It will also set the value if it does not exist yet:
 ```php
 $data = [];
 
-$new = igorw\assoc_in($data, ['foo', 'bar'], 'baz');
+$new = $traversal->assocIn($data, ['foo', 'bar'], 'baz');
 //= ['foo' => ['bar' => 'baz']]
 ```
 
