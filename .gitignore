@@ -1,1 +1,4 @@
-vendor
+# Third party
+
+/vendor/
+/composer.lock
