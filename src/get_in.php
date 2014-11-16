@@ -15,7 +15,7 @@ function get_in(array $array, array $keys, $default = null)
 
     $current = $array;
     foreach ($keys as $key) {
-        if (!array_key_exists($key, $current)) {
+        if ($current === null || !array_key_exists($key, $current)) {
             return $default;
         }
 
@@ -34,7 +34,7 @@ function update_in(array $array, array $keys, callable $f /* , $args... */)
 
     $current = &$array;
     foreach ($keys as $key) {
-        if (!array_key_exists($key, $current)) {
+        if ($current === null || !array_key_exists($key, $current)) {
             throw new \InvalidArgumentException(sprintf('Did not find path %s in structure %s', json_encode($keys), json_encode($array)));
         }
 
@@ -55,7 +55,7 @@ function assoc_in(array $array, array $keys, $value)
     $current = &$array;
     foreach ($keys as $key) {
 
-        if (!is_array($current)) {
+        if ($current === null || !is_array($current)) {
             $current = [];
         }
 
