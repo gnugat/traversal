@@ -38,7 +38,7 @@ class Traversal
      *
      * @return array
      */
-    public function updateIn(array $array, array $keys, callable $f /* , $args... */)
+    public function updateIn(array $array, array $keys, $f /* , $args... */)
     {
         $args = array_slice(func_get_args(), 3);
         if (!$keys) {
