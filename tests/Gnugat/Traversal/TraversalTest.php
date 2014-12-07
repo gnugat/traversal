@@ -54,7 +54,7 @@ class TraversalTest extends PHPUnit_Framework_TestCase
     public function testUpdateIn($expected, $array, $keys, $fn, array $args = array())
     {
         $this->assertSame($expected, call_user_func_array(
-            array($this->traversal, 'updateIn'),
+            'Gnugat\Traversal\update_in',
             array_merge(array($array, $keys, $fn), $args)
         ));
     }
@@ -83,7 +83,7 @@ class TraversalTest extends PHPUnit_Framework_TestCase
     public function testInvalidUpdateIn($expected, $array, $keys, $fn, array $args = array())
     {
         $this->assertSame($expected, call_user_func_array(
-            array($this->traversal, 'updateIn'),
+            'Gnugat\Traversal\update_in',
             array_merge(array($array, $keys, $fn), $args)
         ));
     }
