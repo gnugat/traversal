@@ -1,23 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Traversal project.
+ *
+ * (c) Igor Wiedler <igor@wiedler.ch>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace tests\Gnugat\Traversal;
 
-use Gnugat\Traversal\Traversal;
 use PHPUnit_Framework_TestCase;
 
 class TraversalTest extends PHPUnit_Framework_TestCase
 {
-    private $traversal;
-
-    protected function setUp()
-    {
-        $this->traversal = new Traversal();
-    }
-
     /** @dataProvider provideGetIn */
     public function testGetIn($expected, $array, $keys, $default = null)
     {
-        $this->assertSame($expected, $this->traversal->getIn($array, $keys, $default));
+        $this->assertSame($expected, \Gnugat\Traversal\get_in($array, $keys, $default));
     }
 
     public function provideGetIn()
@@ -45,7 +46,7 @@ class TraversalTest extends PHPUnit_Framework_TestCase
     public function testUpdateIn($expected, $array, $keys, $fn, array $args = array())
     {
         $this->assertSame($expected, call_user_func_array(
-            array($this->traversal, 'updateIn'),
+            'Gnugat\Traversal\update_in',
             array_merge(array($array, $keys, $fn), $args)
         ));
     }
@@ -74,7 +75,7 @@ class TraversalTest extends PHPUnit_Framework_TestCase
     public function testInvalidUpdateIn($expected, $array, $keys, $fn, array $args = array())
     {
         $this->assertSame($expected, call_user_func_array(
-            array($this->traversal, 'updateIn'),
+            'Gnugat\Traversal\update_in',
             array_merge(array($array, $keys, $fn), $args)
         ));
     }
@@ -95,7 +96,7 @@ class TraversalTest extends PHPUnit_Framework_TestCase
     /** @dataProvider provideAssocIn */
     public function testAssocIn($expected, $array, $keys, $value)
     {
-        $this->assertSame($expected, $this->traversal->assocIn($array, $keys, $value));
+        $this->assertSame($expected, \Gnugat\Traversal\assoc_in($array, $keys, $value));
     }
 
     public function provideAssocIn()
@@ -104,12 +105,12 @@ class TraversalTest extends PHPUnit_Framework_TestCase
         $single = array('key' => 'value');
         $empty  = array();
 
-        return [
+        return array(
             array(array('foo' => array('bar' => array('baz' => 'new value'))), $nested, array('foo', 'bar', 'baz'), 'new value'),
             array(array('key' => 'value'), $single, array(), 'new value'),
             array(array('foo' => array('bar' => 'new value')), $empty, array('foo', 'bar'), 'new value'),
             array(array('foo' => 'new value'), array('foo' => null), array('foo'), 'new value'),
             array(array('foo' => array('bar' => 'new value')), array('foo' => null), array('foo', 'bar'), 'new value'),
-        ];
+        );
     }
 }
