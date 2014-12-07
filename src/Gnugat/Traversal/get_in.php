@@ -15,30 +15,30 @@ namespace Gnugat\Traversal;
  * Retrieve value from a nested structure using a list of keys:
  *
  * ```php
- * $users = [
- *     ['name' => 'Igor Wiedler'],
- *     ['name' => 'Jane Doe'],
- *     ['name' => 'Acme Inc'],
- * ];
+ * $users = array(
+ *     array('name' => 'Igor Wiedler'),
+ *     array('name' => 'Jane Doe'),
+ *     array('name' => 'Acme Inc'),
+ * );
  *
- * $name = Gnugat\Traversal\get_in($users, [1, 'name']);
+ * $name = Gnugat\Traversal\get_in($users, array(1, 'name'));
  * //= 'Jane Doe'
  * ```
  *
  * Non existent keys return null:
  *
  * ```php
- * $data = ['foo' => 'bar'];
+ * $data = array('foo' => 'bar'];
  *
- * $baz = Gnugat\Traversal\get_in($data, ['baz']);
+ * $baz = Gnugat\Traversal\get_in($data, array('baz'));
  * //= null
  * ```
  * You can provide a default value that will be used instead of null:
  *
  * ```php
- * $data = ['foo' => 'bar'];
+ * $data = array('foo' => 'bar');
  *
- * $baz = Gnugat\Traversal\get_in($data, ['baz'], 'qux');
+ * $baz = Gnugat\Traversal\get_in($data, array('baz'), 'qux');
  * //= 'qux'
  * ```
  *

@@ -15,25 +15,26 @@ namespace Gnugat\Traversal;
  * Apply a function to the value at a particular location in a nested structure:
  *
  * ```php
- * $data = ['foo' => ['answer' => 42]];
+ * $data = array('foo' => array('answer' => 42));
  * $inc = function ($x) {
  *     return $x + 1;
  * };
  *
- * $new = Gnugat\Traversal\update_in($data, ['foo', 'answer'], $inc);
- * //= ['foo' => ['answer' => 43]]
+ * $new = Gnugat\Traversal\update_in($data, array('foo', 'answer'), $inc);
+ * //= array('foo' => array('answer' => 43))
  * ```
  *
  * You can variadically provide additional arguments for the function:
  *
  * ```php
- * $data = ['foo' => 'bar'];
- * $concat = function () { // Put arguments in here
+ * $data = array('foo' => 'bar');
+ * $concat = function () {
  *     return implode('', func_get_args());
  * };
  *
- * $new = Gnugat\Traversal\update_in($data, ['foo'], $concat, ' is the ', 'best');
- * //= ['foo' => 'bar is the best']
+ * $new = Gnugat\Traversal\update_in($data, array('foo'), $concat, ' is the ', 'best');
+ * //= array('foo' => 'bar is the best')
+ * ```
  *
  * @param array    $array
  * @param array    $keys

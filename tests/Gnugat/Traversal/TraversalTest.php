@@ -105,12 +105,12 @@ class TraversalTest extends PHPUnit_Framework_TestCase
         $single = array('key' => 'value');
         $empty  = array();
 
-        return [
+        return array(
             array(array('foo' => array('bar' => array('baz' => 'new value'))), $nested, array('foo', 'bar', 'baz'), 'new value'),
             array(array('key' => 'value'), $single, array(), 'new value'),
             array(array('foo' => array('bar' => 'new value')), $empty, array('foo', 'bar'), 'new value'),
             array(array('foo' => 'new value'), array('foo' => null), array('foo'), 'new value'),
             array(array('foo' => array('bar' => 'new value')), array('foo' => null), array('foo', 'bar'), 'new value'),
-        ];
+        );
     }
 }

@@ -15,10 +15,10 @@ namespace Gnugat\Traversal;
  * Set a value at a particular location:
  *
  * ```php
- * $data = ['foo' => 'bar'];
+ * $data = array('foo' => 'bar');
  *
- * $new = Gnugat\Traversal\assoc_in($data, ['foo'], 'baz');
- * //= ['foo' => 'baz']
+ * $new = Gnugat\Traversal\assoc_in($data, array('foo'), 'baz');
+ * //= array('foo' => 'baz')
  * ```
  *
  * It will also set the value if it does not exist yet:
@@ -26,8 +26,9 @@ namespace Gnugat\Traversal;
  * ```php
  * $data = [];
  *
- * $new = Gnugat\Traversal\assoc_in($data, ['foo', 'bar'], 'baz');
- * //= ['foo' => ['bar' => 'baz']]
+ * $new = Gnugat\Traversal\assoc_in($data, array('foo', 'bar'), 'baz');
+ * //= array('foo' => array('bar' => 'baz'))
+ * ```
  *
  * @param array $array
  * @param array $keys
@@ -42,7 +43,7 @@ function assoc_in(array $array, array $keys, $value) {
     $current = &$array;
     foreach ($keys as $key) {
         if ($current === null || !is_array($current)) {
-            $current = [];
+            $current = array();
         }
         $current = &$current[$key];
     }
