@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Traversal project.
+ *
+ * (c) Igor Wiedler <igor@wiedler.ch>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace tests\Gnugat\Traversal;
 
 use Gnugat\Traversal\Traversal;
@@ -17,7 +26,7 @@ class TraversalTest extends PHPUnit_Framework_TestCase
     /** @dataProvider provideGetIn */
     public function testGetIn($expected, $array, $keys, $default = null)
     {
-        $this->assertSame($expected, $this->traversal->getIn($array, $keys, $default));
+        $this->assertSame($expected, \Gnugat\Traversal\get_in($array, $keys, $default));
     }
 
     public function provideGetIn()

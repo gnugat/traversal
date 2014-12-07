@@ -5,33 +5,6 @@ namespace Gnugat\Traversal;
 class Traversal
 {
     /**
-     * @param  array  $array
-     * @param  array  $keys
-     * @param  mixed  $default
-     *
-     * @return mixed
-     */
-    public function getIn(array $array, array $keys, $default = null)
-    {
-        if (!$keys) {
-            return $array;
-        }
-        // This is a micro-optimization, it is fast for non-nested keys, but fails for null values
-        if (count($keys) === 1 && isset($array[$keys[0]])) {
-            return $array[$keys[0]];
-        }
-        $current = $array;
-        foreach ($keys as $key) {
-            if ($current === null || !array_key_exists($key, $current)) {
-                return $default;
-            }
-            $current = $current[$key];
-        }
-
-        return $current;
-    }
-
-    /**
      * @param array    $array
      * @param array    $keys
      * @param callable $f
