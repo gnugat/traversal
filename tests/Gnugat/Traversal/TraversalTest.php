@@ -11,18 +11,10 @@
 
 namespace tests\Gnugat\Traversal;
 
-use Gnugat\Traversal\Traversal;
 use PHPUnit_Framework_TestCase;
 
 class TraversalTest extends PHPUnit_Framework_TestCase
 {
-    private $traversal;
-
-    protected function setUp()
-    {
-        $this->traversal = new Traversal();
-    }
-
     /** @dataProvider provideGetIn */
     public function testGetIn($expected, $array, $keys, $default = null)
     {
@@ -104,7 +96,7 @@ class TraversalTest extends PHPUnit_Framework_TestCase
     /** @dataProvider provideAssocIn */
     public function testAssocIn($expected, $array, $keys, $value)
     {
-        $this->assertSame($expected, $this->traversal->assocIn($array, $keys, $value));
+        $this->assertSame($expected, \Gnugat\Traversal\assoc_in($array, $keys, $value));
     }
 
     public function provideAssocIn()

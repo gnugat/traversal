@@ -9,6 +9,7 @@
             "Gnugat\\Traversal\\": "src/Gnugat/Traversal"
         },
         "files": [
+            "src/Gnugat/Traversal/assoc_in.php",
             "src/Gnugat/Traversal/get_in.php",
             "src/Gnugat/Traversal/update_in.php"
         ]
